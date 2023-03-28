@@ -1,0 +1,48 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
+const dotenv = require('dotenv');
+const userRouter = require("./routes/user-routes.js");
+const adminRouter = require("./routes/admin-routes.js");
+const movieRouter = require("./routes/movie-routes.js");
+const bookingRouter = require("./routes/booking-routes.js");
+const cors = require('cors');
+app.use(cors());
+dotenv.config();
+const PORT = 4000;
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
+
+//middleware routes
+app.use(express.json());
+app.use("/user", userRouter);
+app.use("/admin", adminRouter);
+app.use("/movie", movieRouter);
+app.use("/booking", bookingRouter);
+
+// mongodb + srv://vu3t1s2021032:<password>@cluster0.oilqc7g.mongodb.net/test
+mongoose.connect(`mongodb+srv://vu3t1s2021032:${process.env.MONGODB_PASSWORD}@cluster0.oilqc7g.mongodb.net/test`,
+    {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    }
+)
+    // mongoose.connect(`mongodb+srv://ansgupta01:${process.env.MONGODB_PASSWORD}@movie-booking.yd2fpqw.mongodb.net/?retryWrites=true&w=majority`,
+    //     {
+    //         useUnifiedTopology: true,
+    //         useNewUrlParser: true
+    //     }
+    // )
+    .then(() =>
+        console.log("connected successfully")
+    )
+    .catch((e) => console.log(e));
+
+app.listen(PORT, () => {
+    console.log(`SERVER RUNNING ON ${PORT}`);
+})
