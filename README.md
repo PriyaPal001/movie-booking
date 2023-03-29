@@ -4,9 +4,9 @@
 
 Install Application :
 
-
+```bash
  git clone https://github.com/PriyaPal001/movie-booking.git
-
+```
 
 ## Features
 
@@ -16,25 +16,25 @@ Install Application :
 
 ## Change the MongoDB Atlas URL && MongoDB Password
 
-bash
+```bash
   Change the Password in .env inside backend folder
+```
 
-
-bash
+```bash
   cd .\movies\
   npm i
+```
 
-
-bash
+```bash
   cd .\backend\
   npm i
-
+```
 
 ### Application will Run on :
 
-bash
+```bash
     http://localhost:3000
-
+```
 
 ## Authors
 
